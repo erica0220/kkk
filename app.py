@@ -66,14 +66,14 @@ elif option == "칼부림 통계":
     sns.barplot(data=sorted_df, x='지역', y='칼부림', ax=ax, palette='viridis')
     ax.set_xlabel('Region')
     ax.set_ylabel('Number of Incidents')
-    ax.set_xticklabels(fontproperties=font_prop)
+    ax.set_xticklabels(ax.get_xticklabels(), fontproperties=font_prop)
     st.pyplot(fig)
     sorted_df_threats = df_knife.nlargest(10, '칼부림 예고')
     fig, ax = plt.subplots()
     sns.barplot(data=sorted_df_threats, x='지역', y='칼부림 예고', ax=ax, palette='magma')
     ax.set_xlabel('Region')
     ax.set_ylabel('Number of Threats')
-    ax.set_xticklabelsxticks(fontproperties=font_prop)
+    ax.set_xticklabels(ax.get_xticklabels(), fontproperties=font_prop)
     st.pyplot(fig)
 
 elif option == "요일 및 시간대별 범죄 히트맵":
