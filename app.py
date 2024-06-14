@@ -24,7 +24,7 @@ data_weekday_crime, data_cyber_crime, data_area_crime, df_knife = load_data()
 # 사이드바 설정
 st.sidebar.title("범죄 관련 통계")
 option = st.sidebar.selectbox("범죄에 대한 다양한 통계 알아보기",
-                              ("요일별 범죄 분포", "시간대별 범죄 분포", "사이버 범죄", "지역별 범죄 분포", "칼부림 통계", "요일 및 시간대별 범죄 히트맵"))
+                              ("요일별 범죄 분포", "시간대별 범죄 분포", "사이버 범죄", "지역별 범죄 분포", "칼부림 통계"))
 
 if option == "요일별 범죄 분포":
     st.title("요일별 범죄 분포")
@@ -76,20 +76,3 @@ elif option == "칼부림 통계":
     ax.set_xticklabels(ax.get_xticklabels(), rotation = 45, fontproperties=font_prop)
     st.pyplot(fig)
 
-elif option == "요일 및 시간대별 범죄 히트맵":
-    st.title("요일 및 시간대별 범죄 히트맵")
-    time_slots = ['0시00분-02시59분', '03시00분-05시59분', '06시00분-08시59분', '09시00분-11시59분',
-                  '12시00분-14시59분', '15시00분-17시59분', '18시00분-20시59분', '21시00분-23시59분']
-    weekdays = ['일', '월', '화', '수', '목', '금', '토']
-    time_weekday_data = data_weekday_crime.set_index('범죄중분류')[time_slots + weekdays]
-    total_crimes = time_weekday_data.sum().sum()
-    normalized_time_weekday_data = time_weekday_data / total_crimes
-    time_day_matrix = normalized_time_weekday_data[time_slots].groupby(normalized_time_weekday_data.index).mean()
-    plt.figure(figsize=(14, 28))
-    sns.heatmap(time_day_matrix, annot=True, cmap="YlGnBu", fmt=".1%", vmin=0, vmax=0.05, cbar_kws={'label': 'Percentage of Total Crimes'})
-    plt.title('Crime Occurrence by Time and Weekday', fontsize=16)
-    plt.ylabel('Crime Type', fontsize=12)
-    plt.xlabel('Time/Day', fontsize=12)
-    plt.xticks(rotation=45)
-    plt.yticks(rotation=0)
-    st.pyplot(plt)
