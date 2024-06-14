@@ -22,7 +22,7 @@ def load_data():
 data_weekday_crime, data_cyber_crime, data_area_crime, df_knife = load_data()
 
 # 사이드바 설정
-st.sidebar.title("적절한 아무말")
+st.sidebar.title("범죄 관련 통계")
 option = st.sidebar.selectbox("범죄에 대한 다양한 통계 알아보기",
                               ("요일별 범죄 분포", "시간대별 범죄 분포", "사이버 범죄", "지역별 범죄 분포", "칼부림 통계", "요일 및 시간대별 범죄 히트맵"))
 
